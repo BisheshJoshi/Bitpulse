@@ -1,0 +1,352 @@
+:root {
+  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: dark;
+  color: #ffffff;
+  background-color: #0f1014;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  min-width: 320px;
+  min-height: 100vh;
+  background: radial-gradient(circle at 50% 10%, #1a1c29 0%, #0f1014 100%);
+  overflow-x: hidden;
+}
+
+#root {
+  width: 100%;
+}
+
+/* --- Dashboard Container --- */
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden; /* No scroll on desktop */
+  background: #0f1014;
+}
+
+/* --- Header --- */
+.dashboard-header {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  background: rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.brand h1 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin: 0;
+  background: linear-gradient(to right, #fff, #a5a5a5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  box-shadow: 0 0 10px currentColor;
+}
+
+.brand small {
+  color: #666;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.header-price {
+  text-align: center;
+  width: 100%;
+}
+
+.header-price .pair {
+  display: block;
+  font-size: 0.75rem;
+  color: #666;
+  font-weight: 600;
+}
+
+.header-price h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+/* --- Coin Selector --- */
+.coin-selector {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 1rem 0;
+}
+
+.coin-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #888;
+  padding: 0.4rem 1rem;
+  border-radius: 12px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.coin-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.coin-btn.active {
+  background: #00E396;
+  border-color: #00E396;
+  color: #000;
+  box-shadow: 0 0 15px rgba(0, 227, 150, 0.2);
+}
+
+/* --- Main Grid Layout --- */
+.dashboard-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 7fr 3fr; /* 70% Left Column, 30% Right Column */
+  gap: 1.5rem;
+  padding: 1.5rem;
+  overflow: hidden;
+}
+
+/* --- Left Column (Chart + Wallet) --- */
+.left-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  overflow: hidden;
+}
+
+/* --- Panels --- */
+.panel {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  backdrop-filter: blur(16px);
+}
+
+.chart-panel {
+  flex: 2; /* Takes up more space than wallet */
+  min-height: 0;
+}
+
+.wallet-panel {
+  flex: 1; /* Smaller section below chart */
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.panel-header {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(15, 16, 20, 0.95);
+  backdrop-filter: blur(10px);
+}
+
+.panel-header h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ddd;
+}
+
+.panel-header small {
+  color: #666;
+  font-size: 0.75rem;
+}
+
+/* --- Chart Panel --- */
+.chart-wrapper {
+  flex: 1;
+  padding: 1rem;
+  min-height: 0; /* Critical for flex/grid child scrolling */
+}
+
+/* --- Deals Panel --- */
+.deals-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.deal-card {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 1rem;
+  border-radius: 12px;
+  
+  /* CSS Grid Layout for precise alignment */
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas: 
+    "info btn"
+    "price btn";
+  gap: 0.5rem;
+  align-items: center;
+  
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.deal-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.deal-card.best-deal {
+  border-color: rgba(0, 227, 150, 0.3);
+  background: rgba(0, 227, 150, 0.05);
+}
+
+.deal-info {
+  grid-area: info;
+  display: flex;
+  flex-direction: column;
+}
+
+.exchange-name {
+  font-weight: 600;
+  color: #fff;
+  font-size: 0.9rem;
+}
+
+.deal-pair {
+  font-size: 0.75rem;
+  color: #666;
+}
+
+.deal-price {
+  grid-area: price;
+  display: flex;
+  flex-direction: row; /* Align badge next to price */
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.price-value {
+  font-family: 'Roboto Mono', monospace;
+  font-weight: 800; /* Bolder */
+  font-size: 1.1rem; /* Bigger */
+  color: #00E396;
+}
+
+.badge {
+  background: #00E396;
+  color: #000;
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 4px;
+  align-self: center;
+}
+
+.buy-btn {
+  grid-area: btn;
+  background: #fff;
+  color: #000;
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 700;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.buy-btn:hover {
+  background: #00E396;
+  transform: scale(1.05);
+}
+
+.loading {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* --- Responsive (Mobile) --- */
+@media (max-width: 768px) {
+  .dashboard-container {
+    height: auto;
+    overflow-y: auto; /* Scroll on mobile */
+  }
+
+  .dashboard-header {
+    flex-direction: column; /* Stack vertically */
+    height: auto;           /* Allow expanding */
+    padding: 1.5rem 1rem;   /* Adjust padding */
+    gap: 1rem;
+  }
+
+  .brand {
+    width: 100%;
+    display: flex;
+    justify-content: center; /* Center the Title/Logo */
+    align-items: center;
+  }
+  
+  .header-right {
+    width: 100%;
+    justify-content: center;
+    display: flex;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr; /* Stack panels vertically */
+    display: grid;
+    height: auto;
+    padding: 1rem;
+  }
+  
+  .coin-selector {
+    width: 100%;
+    justify-content: center;
+    padding-bottom: 0.5rem;
+  }
+
+  .chart-panel {
+    height: 450px; /* Fixed height for chart on mobile */
+  }
+
+  .deals-panel {
+    height: auto;
+  }
+}
