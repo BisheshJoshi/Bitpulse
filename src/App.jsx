@@ -73,7 +73,7 @@ function App() {
     const fetchAllData = async () => {
       try {
         // 1. Fetch Live Price (Ticker)
-        const priceRes = await fetch(`http://localhost:3001/price/${activeCoin}`)
+        const priceRes = await fetch(`/price/${activeCoin}`)
         if (priceRes.ok) {
           const data = await priceRes.json()
           const currentPrice = parseFloat(data.price)
@@ -94,7 +94,7 @@ function App() {
         }
 
         // 2. Fetch Candle Data (Chart)
-        const candleRes = await fetch(`http://localhost:3001/candles/${activeCoin}`)
+        const candleRes = await fetch(`/candles/${activeCoin}`)
         if (candleRes.ok) {
           const candles = await candleRes.json()
           setCandleData([{
@@ -103,7 +103,7 @@ function App() {
         }
 
         // 3. Fetch Best Market Deals (Aggregator)
-        const dealsRes = await fetch(`http://localhost:3001/tickers/${activeCoin}`)
+        const dealsRes = await fetch(`/tickers/${activeCoin}`)
         if (dealsRes.ok) {
           const deals = await dealsRes.json()
           setMarketDeals(deals)

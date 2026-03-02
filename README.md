@@ -53,12 +53,17 @@ node server.js
 *The server will start on `http://localhost:3001`*
 
 ### 4. Start the Frontend Application
-Open a new terminal window and run:
+**Important**: Open a **new terminal window** (keep the backend server running) and run:
 
 ```bash
 npm run dev
 ```
 *The application will be available at `http://localhost:5173` (or the port shown in your terminal)*
+
+### ⚠️ Important Notes
+- **Both servers must run simultaneously** for the application to work properly.
+- The frontend uses Vite's proxy configuration to route API calls (`/price`, `/candles`, `/tickers`) to the backend server.
+- If you're using GitHub Codespaces or similar environments, the proxy ensures proper API connectivity.
 
 ## 📂 Project Structure
 
@@ -82,7 +87,10 @@ bitpulse/
 The local Express server (`server.js`) exposes the following endpoints:
 
 - **GET `/price/:symbol`**: Fetches current price for a cryptocurrency (e.g., `bitcoin`, `ethereum`).
-- **GET `/candles/:symbol`**: Fetches OHLC candle data for charts.
+- **GET `/candles/:symbol`**: Fetches OHLC candle data for charts (60 minutes of 1-minute candles).
+- **GET `/tickers/:symbol`**: Fetches market ticker data from multiple exchanges for price comparison.
+
+**Note**: These endpoints are proxied through Vite during development. The frontend calls relative URLs like `/price/bitcoin`, which are automatically forwarded to `http://localhost:3001/price/bitcoin`.
 
 ## 🤝 Contributing
 

@@ -6,10 +6,17 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/api': {
-        target: 'https://api.coingecko.com/api/v3',
+      '/price': {
+        target: 'http://localhost:3001',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ''),
+      },
+      '/candles': {
+        target: 'http://localhost:3001',
+        changeOrigin: true,
+      },
+      '/tickers': {
+        target: 'http://localhost:3001',
+        changeOrigin: true,
       },
     },
   },
